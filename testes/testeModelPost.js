@@ -1,6 +1,6 @@
 const { sequelize, Post } = require('../models');
 
-Post.findAll().then(
+Post.findAll({include:'comentarios'}).then(
     data => {
         console.log(data.map( u => u.toJSON()));
         sequelize.close();
