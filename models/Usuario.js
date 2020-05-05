@@ -1,5 +1,5 @@
-let Usuario = (sequelize, DataTypes) => {
-    return sequelize.define(
+const Usuario = (sequelize, DataTypes) => {
+    var usuario = sequelize.define(
         'Usuario',
         {
             id: {
@@ -26,6 +26,11 @@ let Usuario = (sequelize, DataTypes) => {
         }
 
     );
+    usuario.associate = (models) => {
+        usuario.hasMany(models.Comentario, {foreignKey: 'usuarios_id', as:'comentarios'})
+        usuario.hasMany(models.Post, {foreignKey: 'usuarios_id', as:'posts'})
+    }
+    return usuario;
 }
 
 module.exports = Usuario;
